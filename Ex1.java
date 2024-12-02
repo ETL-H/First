@@ -1,4 +1,7 @@
 package assignments.ex1;
+
+import java.util.Arrays;
+
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -32,9 +35,25 @@ public class Ex1 {
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            // add your code here
+            int lastB = a.lastIndexOf('b');
+            if(lastB == -1){//&& the rest of numbers are valid)
+                return true;
+            }
+            String chars = "123456789ABCDEFG";
+            char base = a.charAt(a.length() - 1);
+            String str_base = String.valueOf(base);
+            String[] newChars = chars.split(str_base);
+            String numberWithoutBase = a.substring(0, a.length()-2);
+            String[] theInput = numberWithoutBase.split("");
+            for (int i = 0; i < theInput.length; i = i + 1){
+                if(!(Arrays.toString(newChars).contains(theInput[i]))){
+                    ans = false;
+                }
+            }
 
-            ////////////////////
+
+
+
             return ans;
         }
 
