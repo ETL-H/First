@@ -40,20 +40,16 @@ public class Ex1 {
                 return true;
             }
             String chars = "123456789ABCDEFG";
-            char base = a.charAt(a.length() - 1);
+            char base = a.charAt(a.length() - 2);
             String str_base = String.valueOf(base);
             String[] newChars = chars.split(str_base);
             String numberWithoutBase = a.substring(0, a.length()-2);
             String[] theInput = numberWithoutBase.split("");
-            for (int i = 0; i < theInput.length; i = i + 1){
+            for (int i = 0; i < theInput.length && ans; i = i + 1){
                 if(!(Arrays.toString(newChars).contains(theInput[i]))){
                     ans = false;
                 }
             }
-
-
-
-
             return ans;
         }
 

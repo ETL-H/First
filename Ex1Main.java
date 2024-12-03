@@ -1,4 +1,5 @@
 package assignments.ex1;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static assignments.ex1.Ex1.isNumber;
@@ -18,16 +19,18 @@ public class Ex1Main {
             System.out.println("Ex1 class solution:");
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
-            Ex1.isNumber(num1);
-            if (!num1.equals("quit")) {
-                // checks isNumber and prints true / false and value
-                // ask for second number
+            boolean ans1 = Ex1.isNumber(num1);
+            if(!num1.equals("quit")) {
+                System.out.printf(num1 + " is number: " + ans1 + " value = ");// string to value function);
+                System.out.println();
+                System.out.println("Ex1 class solution:");
+                System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
+                num2 = sc.next();
             }
-            // if second number isn't quit
-                // check if it is a number and print is number and value
-                // ask for the base [2 - 16]
-            // if the base is valid
-
+            if(!num2.equals(quit) && ans1){
+                boolean ans2 = Ex1.isNumber(num2);
+                System.out.printf(num2 + " is number: " + ans2 + " value = ");// string to value function);
+            }
         }
         System.out.println("quiting now...");
     }
