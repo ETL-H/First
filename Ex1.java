@@ -22,7 +22,7 @@ public class Ex1 {
          * @param //num a String representing a number in basis [2,16]
          * @return
          */
-        public static String[] input2NumAnsBase(String input){
+        public static String[] input2NumAndBase(String input){
             ArrayList<String> result = new ArrayList<String>();
             int count = 0;
             for(int i=0; i < input.length(); i++)
@@ -37,9 +37,9 @@ public class Ex1 {
                 result.add(num);
                 result.add(base);
             }
-            else {
-                result.add("-1");
-                result.add("-1");
+            else if (lastb == -1) {
+                result.add(input);
+                result.add("A");
             }
 
             String[] finalResult = result.toArray(String[]::new);
@@ -48,8 +48,20 @@ public class Ex1 {
 
 
         public static int number2Int(String num) {
-            String number = input2NumAnsBase(num)[0];
-            int sBase = Integer.parseInt(input2NumAnsBase(num)[1]);
+            String chars1 = "123456789";
+            String chars2 = "ABCDEFG";
+            String number = input2NumAndBase(num)[0];
+            int sBase;
+            String base = input2NumAndBase(num)[1];
+            sBase = base.charAt(0);
+            if(chars1.contains(base)){
+                sBase -= 48;
+            }
+            else if (chars2.contains(base)) {
+                sBase -= 55;
+            }
+            System.out.println(base);
+            System.out.println(sBase);
             int dBase = 10;
             return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
 
@@ -62,21 +74,31 @@ public class Ex1 {
         public static boolean isNumber(String a) {
             boolean ans = true;
             int lastB = a.lastIndexOf('b');
-            if(lastB != a.length() - 2){//&& the rest of numbers are valid)
-                ans = false;
-            }
             String chars = "123456789ABCDEFG";
             char base = a.charAt(a.length() - 2);
-            String str_base = String.valueOf(base);
+            String str_base = input2NumAndBase(a)[1];
             String[] newChars = chars.split(str_base);
             String numberWithoutBase = a.substring(0, a.length()-2);
             String[] theInput = numberWithoutBase.split("");
-            for (int i = 0; i < theInput.length && ans; i = i + 1){
-                if(!(Arrays.toString(newChars).contains(theInput[i]))){
-                    ans = false;
+            if(lastB == -1){
+                for (int i = 0; i < theInput.length && ans; i = i + 1){
+                    if(!(Arrays.toString(newChars).contains(theInput[i]))){
+                        return false;
+                    }
                 }
+                return true;
             }
-            return ans;
+            else if (lastB != a.length() - 2){//&& the rest of numbers are valid)
+                return false;
+            }
+            else {
+                for (int i = 0; i < theInput.length && ans; i = i + 1) {
+                    if (!(Arrays.toString(newChars).contains(theInput[i]))) {
+                        ans = false;
+                    }
+                }
+                return ans;
+            }
         }
 
         /**

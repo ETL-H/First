@@ -2,8 +2,7 @@ package assignments.ex1;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static assignments.ex1.Ex1.isNumber;
-
+import static assignments.ex1.Ex1.*;
 /**
  * Intro2CS, Ex1 - very basic "main template"
  * Make sure your implementation of this main performs as the Ex1Sol.jar solution implement all needed functions.
@@ -20,8 +19,6 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
             boolean ans1 = Ex1.isNumber(num1);
-            System.out.println(Ex1.number2Int(num1));
-
             if(!num1.equals("quit")) {
                 System.out.printf(num1 + " is number: " + ans1 + " value = " + Ex1.number2Int(num1));
                 System.out.println();
