@@ -20,6 +20,8 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
             boolean ans1 = Ex1.isNumber(num1);
+            System.out.println(Ex1.number2Int(num1));
+
             if(!num1.equals("quit")) {
                 System.out.printf(num1 + " is number: " + ans1 + " value = ");// string to value function);
                 System.out.println();

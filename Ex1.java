@@ -1,5 +1,6 @@
 package assignments.ex1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -18,15 +19,39 @@ public class Ex1 {
         /**
          * Convert the given number (num) to a decimal representation (as int).
          * It the given number is not in a valid format returns -1.
-         * @param num a String representing a number in basis [2,16]
+         * @param //num a String representing a number in basis [2,16]
          * @return
          */
-        public static int number2Int(String num) {
-            int ans = -1;
-            // add your code here
+        public static String[] input2NumAnsBase(String input){
+            ArrayList<String> result = new ArrayList<String>();
+            int count = 0;
+            for(int i=0; i < input.length(); i++)
+            {    if(input.charAt(i) == 'b')
+                count++;
+            }
+            int lastb = input.lastIndexOf('b');
+            if(lastb == input.length() - 2 && count == 1) {
+                int numLen = input.length();
+                String num = input.substring(0, numLen - 2);
+                String base = input.substring(numLen - 1);
+                result.add(num);
+                result.add(base);
+            }
+            else {
+                result.add("-1");
+                result.add("-1");
+            }
 
-            ////////////////////
-            return ans;
+            String[] finalResult = result.toArray(String[]::new);
+            return finalResult;
+        }
+
+
+        public static int number2Int(String num) {
+            String ans = "-1";
+            System.out.println(input2NumAnsBase(num)[0]);
+            ans = input2NumAnsBase(num)[1];
+            return Integer.parseInt(ans);
         }
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
@@ -36,8 +61,8 @@ public class Ex1 {
         public static boolean isNumber(String a) {
             boolean ans = true;
             int lastB = a.lastIndexOf('b');
-            if(lastB == -1){//&& the rest of numbers are valid)
-                return true;
+            if(lastB != -1){//&& the rest of numbers are valid)
+                ans = false;
             }
             String chars = "123456789ABCDEFG";
             char base = a.charAt(a.length() - 2);
