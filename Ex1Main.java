@@ -23,7 +23,7 @@ public class Ex1Main {
             System.out.println(Ex1.number2Int(num1));
 
             if(!num1.equals("quit")) {
-                System.out.printf(num1 + " is number: " + ans1 + " value = ");// string to value function);
+                System.out.printf(num1 + " is number: " + ans1 + " value = " + Ex1.number2Int(num1));
                 System.out.println();
                 System.out.println("Ex1 class solution:");
                 System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");

@@ -48,10 +48,11 @@ public class Ex1 {
 
 
         public static int number2Int(String num) {
-            String ans = "-1";
-            System.out.println(input2NumAnsBase(num)[0]);
-            ans = input2NumAnsBase(num)[1];
-            return Integer.parseInt(ans);
+            String number = input2NumAnsBase(num)[0];
+            int sBase = Integer.parseInt(input2NumAnsBase(num)[1]);
+            int dBase = 10;
+            return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
+
         }
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
@@ -61,7 +62,7 @@ public class Ex1 {
         public static boolean isNumber(String a) {
             boolean ans = true;
             int lastB = a.lastIndexOf('b');
-            if(lastB != -1){//&& the rest of numbers are valid)
+            if(lastB != a.length() - 2){//&& the rest of numbers are valid)
                 ans = false;
             }
             String chars = "123456789ABCDEFG";
