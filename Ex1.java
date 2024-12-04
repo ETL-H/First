@@ -30,6 +30,19 @@ public class Ex1 {
                 count++;
             }
             int lastb = input.lastIndexOf('b');
+            if(input.length() == 1){
+                String chars = "123456789";
+                if(!chars.contains(input)){
+                    String[] quit;
+                    quit = new String[]{"-1", "-1"};
+                    return quit;
+                }
+                else{
+                    String[] quit;
+                    quit = new String[]{input, "A"};
+                    return quit;
+                }
+            }
             if(lastb == input.length() - 2 && count == 1) {
                 int numLen = input.length();
                 String num = input.substring(0, numLen - 2);
@@ -41,8 +54,13 @@ public class Ex1 {
                 result.add(input);
                 result.add("A");
             }
+            else {
+                result.add("-1");
+                result.add("-1");
+            }
 
             String[] finalResult = result.toArray(String[]::new);
+            System.out.println(result);
             return finalResult;
         }
 
@@ -54,14 +72,15 @@ public class Ex1 {
             int sBase;
             String base = input2NumAndBase(num)[1];
             sBase = base.charAt(0);
-            if(chars1.contains(base)){
+            if (base.equals("-1")){
+                return -1;
+            }
+            else if (chars1.contains(base)){
                 sBase -= 48;
             }
             else if (chars2.contains(base)) {
                 sBase -= 55;
             }
-            System.out.println(base);
-            System.out.println(sBase);
             int dBase = 10;
             return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
 
@@ -75,7 +94,6 @@ public class Ex1 {
             boolean ans = true;
             int lastB = a.lastIndexOf('b');
             String chars = "123456789ABCDEFG";
-            char base = a.charAt(a.length() - 2);
             String str_base = input2NumAndBase(a)[1];
             String[] newChars = chars.split(str_base);
             String numberWithoutBase = a.substring(0, a.length()-2);

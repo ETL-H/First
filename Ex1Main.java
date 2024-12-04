@@ -2,6 +2,7 @@ package assignments.ex1;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 import static assignments.ex1.Ex1.*;
 /**
  * Intro2CS, Ex1 - very basic "main template"
