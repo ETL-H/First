@@ -29,7 +29,7 @@ public class Ex1Main {
             }
             if(!num2.equals(quit) && ans1){
                 boolean ans2 = Ex1.isNumber(num2);
-                System.out.printf(num2 + " is number: " + ans2 + " value = ");// string to value function);
+                System.out.printf(num2 + " is number: " + ans2 + " value = " + Ex1.number2Int(num2));
             }
         }
         System.out.println("quiting now...");

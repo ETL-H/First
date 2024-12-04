@@ -16,108 +16,117 @@ import java.util.Arrays;
  * You should implement the following static functions:
  */
 public class Ex1 {
-        /**
-         * Convert the given number (num) to a decimal representation (as int).
-         * It the given number is not in a valid format returns -1.
-         * @param //num a String representing a number in basis [2,16]
-         * @return
-         */
-        public static String[] input2NumAndBase(String input){
-            ArrayList<String> result = new ArrayList<String>();
-            int count = 0;
-            for(int i=0; i < input.length(); i++)
-            {    if(input.charAt(i) == 'b')
-                count++;
-            }
-            int lastb = input.lastIndexOf('b');
-            if(input.length() == 1){
-                String chars = "123456789";
-                if(!chars.contains(input)){
-                    String[] quit;
-                    quit = new String[]{"-1", "-1"};
-                    return quit;
-                }
-                else{
-                    String[] quit;
-                    quit = new String[]{input, "A"};
-                    return quit;
-                }
-            }
-            if(lastb == input.length() - 2 && count == 1) {
-                int numLen = input.length();
-                String num = input.substring(0, numLen - 2);
-                String base = input.substring(numLen - 1);
-                result.add(num);
-                result.add(base);
-            }
-            else if (lastb == -1) {
-                result.add(input);
-                result.add("A");
-            }
-            else {
-                result.add("-1");
-                result.add("-1");
-            }
-
-            String[] finalResult = result.toArray(String[]::new);
-            System.out.println(result);
-            return finalResult;
+    /**
+     * Convert the given number (num) to a decimal representation (as int).
+     * It the given number is not in a valid format returns -1.
+     *
+     * @param //num a String representing a number in basis [2,16]
+     * @return
+     */
+    public static String[] input2NumAndBase(String input) {
+        ArrayList<String> result = new ArrayList<String>();
+        int count = 0;
+//            for(int i=0; i < input.length(); i++)
+//            {    if(input.charAt(i) == 'b')
+//                count++;
+//            }
+//            int lastb = input.lastIndexOf('b');
+//            if(input.length() == 1){
+//                String chars = "123456789";
+//                if(!chars.contains(input)){
+//                    String[] quit;
+//                    quit = new String[]{"-1", "-1"};
+//                    return quit;
+//                }
+//                else{
+//                    String[] quit;
+//                    quit = new String[]{input, "A"};
+//                    return quit;
+//                }
+//            }
+        if (isNumber(input)) {
+            int numLen = input.length();
+            String num = input.substring(0, numLen - 2);
+            String base = input.substring(numLen - 1);
+            result.add(num);
+            result.add(base);
         }
+//            else if (lastb == -1) {
+//                result.add(input);
+//                result.add("A");
+//            }
+//            else {
+//                result.add("-1");
+//                result.add("-1");
+//            }
+
+        String[] finalResult = result.toArray(String[]::new);
+        System.out.println(result);
+        return finalResult;
+    }
 
 
-        public static int number2Int(String num) {
+    public static int number2Int(String num) {
+        if(isNumber(num)) {
             String chars1 = "123456789";
             String chars2 = "ABCDEFG";
             String number = input2NumAndBase(num)[0];
             int sBase;
             String base = input2NumAndBase(num)[1];
             sBase = base.charAt(0);
-            if (base.equals("-1")){
+            if (base.equals("-1")) {
                 return -1;
-            }
-            else if (chars1.contains(base)){
+            } else if (chars1.contains(base)) {
                 sBase -= 48;
-            }
-            else if (chars2.contains(base)) {
+            } else if (chars2.contains(base)) {
                 sBase -= 55;
             }
             int dBase = 10;
-            return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
 
+            return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
         }
-        /**
-         * This static function checks if the given String (g) is in a valid "number" format.
-         * @param a a String representing a number
-         * @return true iff the given String is in a number format
-         */
-        public static boolean isNumber(String a) {
-            boolean ans = true;
-            int lastB = a.lastIndexOf('b');
-            String chars = "123456789ABCDEFG";
-            String str_base = input2NumAndBase(a)[1];
-            String[] newChars = chars.split(str_base);
-            String numberWithoutBase = a.substring(0, a.length()-2);
-            String[] theInput = numberWithoutBase.split("");
-            if(lastB == -1){
-                for (int i = 0; i < theInput.length && ans; i = i + 1){
-                    if(!(Arrays.toString(newChars).contains(theInput[i]))){
-                        return false;
-                    }
-                }
-                return true;
+        else{
+            return -1;
+        }
+    }
+
+    /**
+     * This static function checks if the given String (g) is in a valid "number" format.
+     *
+     * @param a a String representing a number
+     * @return true iff the given String is in a number format
+     */
+    public static boolean isNumber(String a) {
+        boolean ans = true;
+        int count = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) == 'b')
+                count++;
+        }
+        int lastb = a.lastIndexOf('b');
+        if (a.length() == 1) {
+            String chars = "123456789";
+            if (!chars.contains(a)) {
+                ans = false;
+            } else {
+                ans = true;
             }
-            else if (lastB != a.length() - 2){//&& the rest of numbers are valid)
-                return false;
-            }
-            else {
-                for (int i = 0; i < theInput.length && ans; i = i + 1) {
-                    if (!(Arrays.toString(newChars).contains(theInput[i]))) {
-                        ans = false;
-                    }
+            String number = input2NumAndBase(a)[0];
+            int base = Integer.parseInt(input2NumAndBase(a)[1]);
+            for (char c : number.toCharArray()) {
+                int digitValue = Character.isDigit(c)
+                        ? c - '0' // Convert '0'-'9' to 0-9
+                        : Character.toUpperCase(c) - 'A' + 10; // Convert 'A'-'G' to 10-16
+
+                // Check if the digit is valid for the base
+                if (digitValue < 0 || digitValue >= base) {
+                    return false; // Invalid digit
                 }
-                return ans;
             }
         }
+            return ans; // All digits are valid
+    }
+
 
         /**
          * Calculate the number representation (in basis base)
@@ -127,7 +136,7 @@ public class Ex1 {
          * @param base the basis [2,16]
          * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
          */
-        public static String int2Number(int num, int base) {
+        public static String int2Number ( int num, int base){
             String ans = "";
             // add your code here
 
@@ -141,7 +150,7 @@ public class Ex1 {
          * @param n2 second number
          * @return true iff the two numbers have the same values.
          */
-        public static boolean equals(String n1, String n2) {
+        public static boolean equals (String n1, String n2){
             boolean ans = true;
             // add your code here
 
@@ -157,11 +166,11 @@ public class Ex1 {
          * @return the index in the array in with the largest number (in value).
          *
          */
-        public static int maxIndex(String[] arr) {
+        public static int maxIndex (String[]arr){
             int ans = 0;
             // add your code here
 
             ////////////////////
             return ans;
         }
-}
+    }
