@@ -26,69 +26,61 @@ public class Ex1 {
     public static String[] input2NumAndBase(String input) {
         ArrayList<String> result = new ArrayList<String>();
         int count = 0;
-//            for(int i=0; i < input.length(); i++)
-//            {    if(input.charAt(i) == 'b')
-//                count++;
-//            }
-//            int lastb = input.lastIndexOf('b');
-//            if(input.length() == 1){
-//                String chars = "123456789";
-//                if(!chars.contains(input)){
-//                    String[] quit;
-//                    quit = new String[]{"-1", "-1"};
-//                    return quit;
-//                }
-//                else{
-//                    String[] quit;
-//                    quit = new String[]{input, "A"};
-//                    return quit;
-//                }
-//            }
-        if (isNumber(input)) {
+        input = input.strip();
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'b')
+                count++;
+        }
+        int lastb = input.lastIndexOf('b');
+        if (input.length() == 1) {
+            String chars = "123456789";
+            if (!chars.contains(input)) {
+                String[] quit;
+                quit = new String[]{"-1", "-1"};
+                return quit;
+            } else {
+                String[] quit;
+                quit = new String[]{input, "10"};
+                return quit;
+            }
+        }
+        if (count == 1 && lastb == input.length() - 2 && input.length() > 1) {
             int numLen = input.length();
             String num = input.substring(0, numLen - 2);
             String base = input.substring(numLen - 1);
             result.add(num);
             result.add(base);
+        } else if (lastb == -1) {
+            result.add(input);
+            result.add("A");
+        } else {
+            result.add("-1");
+            result.add("-1");
         }
-//            else if (lastb == -1) {
-//                result.add(input);
-//                result.add("A");
-//            }
-//            else {
-//                result.add("-1");
-//                result.add("-1");
-//            }
 
         String[] finalResult = result.toArray(String[]::new);
+        String chars = "ABCDEFG";
+        if (chars.contains(finalResult[1])) {
+            finalResult[1] = String.valueOf(finalResult[1].charAt(0) - 55);
+        }
         System.out.println(result);
         return finalResult;
     }
 
 
     public static int number2Int(String num) {
-        if(isNumber(num)) {
-            String chars1 = "123456789";
-            String chars2 = "ABCDEFG";
+        if (isNumber(num)) {
             String number = input2NumAndBase(num)[0];
-            int sBase;
             String base = input2NumAndBase(num)[1];
-            sBase = base.charAt(0);
-            if (base.equals("-1")) {
-                return -1;
-            } else if (chars1.contains(base)) {
-                sBase -= 48;
-            } else if (chars2.contains(base)) {
-                sBase -= 55;
-            }
+            int sBase = Integer.parseInt(base);
             int dBase = 10;
-
-            return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
+            if (!Integer.toString(sBase).equals("-1"))
+                return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
         }
-        else{
             return -1;
-        }
+
     }
+
 
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
@@ -99,32 +91,41 @@ public class Ex1 {
     public static boolean isNumber(String a) {
         boolean ans = true;
         int count = 0;
+        int base = 10;
+        String number = "";
+        a = a.strip();
+        int lastb = a.lastIndexOf('b');
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) == 'b')
                 count++;
         }
-        int lastb = a.lastIndexOf('b');
-        if (a.length() == 1) {
-            String chars = "123456789";
-            if (!chars.contains(a)) {
-                ans = false;
-            } else {
-                ans = true;
+        if (a.isEmpty()) {
+            return false;
+        } else {
+            if (count == 0) {
+                 base = 10;
+                 number = a;
             }
-            String number = input2NumAndBase(a)[0];
-            int base = Integer.parseInt(input2NumAndBase(a)[1]);
-            for (char c : number.toCharArray()) {
-                int digitValue = Character.isDigit(c)
-                        ? c - '0' // Convert '0'-'9' to 0-9
-                        : Character.toUpperCase(c) - 'A' + 10; // Convert 'A'-'G' to 10-16
+            else if (count == 1 && lastb == a.length() - 2 && a.length() > 1) {
+                 base = Integer.parseInt(input2NumAndBase(a)[1]);
+                 number = input2NumAndBase(a)[0];
+            }
+            else {
+                return false;
+            }
+                for (char c : number.toCharArray()) {
+                    int digitValue = Character.isDigit(c)
+                            ? c - '0' // Convert '0'-'9' to 0-9
+                            : Character.toUpperCase(c) - 'A' + 10; // Convert 'A'-'G' to 10-16
 
-                // Check if the digit is valid for the base
-                if (digitValue < 0 || digitValue >= base) {
-                    return false; // Invalid digit
+                    // Check if the digit is valid for the base
+                    if (digitValue < 0 || digitValue >= base) {
+                        return false; // Invalid digit
+                    }
                 }
-            }
-        }
+
             return ans; // All digits are valid
+        }
     }
 
 
