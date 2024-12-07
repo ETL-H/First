@@ -63,6 +63,9 @@ public class Ex1 {
         if (chars.contains(finalResult[1])) {
             finalResult[1] = String.valueOf(finalResult[1].charAt(0) - 55);
         }
+        else {
+            finalResult[1] = "-1";
+        }
         System.out.println(result);
         return finalResult;
     }
@@ -116,7 +119,7 @@ public class Ex1 {
                 for (char c : number.toCharArray()) {
                     int digitValue = Character.isDigit(c)
                             ? c - '0' // Convert '0'-'9' to 0-9
-                            : Character.toUpperCase(c) - 'A' + 10; // Convert 'A'-'G' to 10-16
+                            : c - 'A' + 10; // Convert 'A'-'G' to 10-16
 
                     // Check if the digit is valid for the base
                     if (digitValue < 0 || digitValue >= base) {
