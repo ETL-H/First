@@ -11,13 +11,12 @@ import static assignments.ex1.Ex1.*;
  */
 public class Ex1Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String chars = "123456789ABCDEFG";
+        Scanner scanner = new Scanner(System.in);
         String num1 = "", num2="", quit = "quit", base ="";
         while (!num1.equals(quit) && !num2.equals(quit)) {
             System.out.println();
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
-            num1 = sc.next();
+            num1 = scanner.nextLine();
             boolean ans1 = Ex1.isNumber(num1);
             boolean flag = true;
             if(num1.equals("quit")){
@@ -28,7 +27,7 @@ public class Ex1Main {
                 System.out.println();
                 if (isNumber(num1)){
                 System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
-                num2 = sc.next();
+                num2 = scanner.nextLine();
                 }
                 else{
                     System.out.printf("ERR: num1 is in the wrong format! " + num1);
@@ -40,10 +39,10 @@ public class Ex1Main {
                 if(ans2) {
                     System.out.println(num2 + " is number: true , value = " + Ex1.number2Int(num2));
                     System.out.println("Enter a base for out put - [2,16]: " );
-                    String outPutBase = sc.next();
+                    String outPutBase = scanner.nextLine();
                     boolean isBase = false;
                     for(int i = 2; i <= 16 && !isBase; i++){
-                        if(outPutBase.contains(String.valueOf(i))){
+                        if(outPutBase.equals(String.valueOf(i))){
                             isBase = true;
                         }
                     }
@@ -52,14 +51,23 @@ public class Ex1Main {
                         int secondNumber = Ex1.number2Int(num2);
                         int addNumbers = firstNumber + secondNumber;
                         int theOutPutBase = Integer.parseInt(outPutBase);
+                        String sValBase = Ex1.int2Number(theOutPutBase, 16);
+                        System.out.println(sValBase);
                         String finalAdd = Ex1.int2Number(addNumbers, theOutPutBase);
                         int multiNumbers = firstNumber * secondNumber;
                         String finalMulti = Ex1.int2Number(multiNumbers, theOutPutBase);
                         String[] maxCheck = {num1, num2, finalAdd, finalMulti};
                         int maxNum = Ex1.maxIndex(maxCheck);
+                        if(!sValBase.equals("10")){
+                            maxCheck[2] = maxCheck[2] + "b" + sValBase;
+                            maxCheck[3] = maxCheck[3] + "b" + sValBase;
+                            finalAdd +=  "b" + sValBase;
+                            finalMulti +=  "b" + sValBase;
+                        }
+                        String maxNumS = maxCheck[maxNum];
                         System.out.println(num1 + " + " + num2 + " = " + finalAdd);
                         System.out.println(num1 + " * " + num2 + " = " + finalMulti);
-                        System.out.println("Max number over ["+ num1+", "+ num2 +", "+ finalAdd +", "+ finalMulti + "] is: " + maxNum);
+                        System.out.println("Max number over ["+ num1+", "+ num2 +", "+ finalAdd +", "+ finalMulti + "] is: " + maxNumS);
 
                     }
                     else{

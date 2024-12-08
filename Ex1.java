@@ -102,7 +102,7 @@ public class Ex1 {
             if (a.charAt(i) == 'b')
                 count++;
         }
-        if (a.isEmpty()) {
+        if (a.isEmpty() || hasSpace(a)) {
             return false;
         } else {
             if (count == 0) {
@@ -143,7 +143,7 @@ public class Ex1 {
         String ans = "";
         String sNum = String.valueOf(num);
         int sBase = Integer.parseInt(input2NumAndBase(sNum)[1]);
-        ans = String.valueOf(Integer.parseInt(Integer.toString(Integer.parseInt(sNum, sBase), base)));
+        ans = Integer.toString(Integer.parseInt(String.valueOf(num), sBase), base);
         return ans;
     }
 
@@ -173,12 +173,28 @@ public class Ex1 {
     public static int maxIndex(String[] arr) {
         int ans = 0;
         for (int i = 0; i < 4; i++) {
-            int arrI = Integer.parseInt(input2NumAndBase(arr[i])[0]);
+            int arrI = number2Int(arr[i]);
             if (ans < arrI) {
-                ans = arrI;
+                ans = i;
             }
         }
         return ans;
     }
+
+    public static boolean hasSpace(String input) {
+        boolean hasSpace = false;
+
+
+        for (
+                int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == ' ') {
+                hasSpace = true;
+                break;
+            }
+        }
+        return hasSpace;
+    }
 }
+
 
