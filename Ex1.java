@@ -60,6 +60,10 @@ public class Ex1 {
 
         String[] finalResult = result.toArray(String[]::new);
         String chars = "ABCDEFG";
+        String chars2 = "123456789";
+        if(chars2.contains(finalResult[1])){
+            return finalResult;
+        }
         if (chars.contains(finalResult[1])) {
             finalResult[1] = String.valueOf(finalResult[1].charAt(0) - 55);
         }
@@ -141,7 +145,9 @@ public class Ex1 {
          */
         public static String int2Number ( int num, int base) {
             String ans = "";
-            ans = String.valueOf(Integer.parseInt(String.valueOf(num) ,base));
+            String sNum = String.valueOf(num);
+            int sBase = Integer.parseInt(input2NumAndBase(sNum)[1]);
+            ans = String.valueOf(Integer.parseInt(Integer.toString(Integer.parseInt(sNum, sBase), base)));
             return ans;
         }
 

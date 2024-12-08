@@ -57,7 +57,7 @@ public class Ex1Main {
                         String finalMulti = Ex1.int2Number(multiNumbers, theOutPutBase);
                         String[] maxCheck = {num1, num2, finalAdd, finalMulti};
                         int maxNum = Ex1.maxIndex(maxCheck);
-                        System.out.println(addNumbers +""+ multiNumbers);
+                        System.out.println(num1 + "+" + num2 + "=" + finalAdd);
                         System.out.println("Max number over ["+ num1+","+ num2 +","+ finalAdd +","+ finalMulti + "]is: " + maxNum);
 
                     }
