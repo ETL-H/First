@@ -48,6 +48,17 @@ public class Ex1Main {
                         }
                     }
                     if(isBase){
+                        int firstNumber = Ex1.number2Int(num1);
+                        int secondNumber = Ex1.number2Int(num2);
+                        int addNumbers = firstNumber + secondNumber;
+                        int theOutPutBase = Integer.parseInt(outPutBase);
+                        String finalAdd = Ex1.int2Number(addNumbers, theOutPutBase);
+                        int multiNumbers = firstNumber * secondNumber;
+                        String finalMulti = Ex1.int2Number(multiNumbers, theOutPutBase);
+                        String[] maxCheck = {num1, num2, finalAdd, finalMulti};
+                        int maxNum = Ex1.maxIndex(maxCheck);
+                        System.out.println(addNumbers +""+ multiNumbers);
+                        System.out.println("Max number over ["+ num1+","+ num2 +","+ finalAdd +","+ finalMulti + "]is: " + maxNum);
 
                     }
                     else{

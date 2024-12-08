@@ -66,7 +66,6 @@ public class Ex1 {
         else {
             finalResult[1] = "-1";
         }
-        System.out.println(result);
         return finalResult;
     }
 
@@ -140,11 +139,9 @@ public class Ex1 {
          * @param base the basis [2,16]
          * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
          */
-        public static String int2Number ( int num, int base){
+        public static String int2Number ( int num, int base) {
             String ans = "";
-            // add your code here
-
-            ////////////////////
+            ans = String.valueOf(Integer.parseInt(String.valueOf(num) ,base));
             return ans;
         }
 
@@ -172,9 +169,12 @@ public class Ex1 {
          */
         public static int maxIndex (String[]arr){
             int ans = 0;
-            // add your code here
-
-            ////////////////////
+            for(int i = 0; i < 4; i++){
+                int arrI = Integer.parseInt(input2NumAndBase(arr[i])[0]);
+                if(ans < arrI){
+                    ans = arrI;
+                }
+            }
             return ans;
         }
     }
