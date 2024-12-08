@@ -1,5 +1,4 @@
 package assignments.ex1;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,7 +32,7 @@ public class Ex1 {
         }
         int lastb = input.lastIndexOf('b');
         if (input.length() == 1) {
-            String chars = "123456789";
+            String chars = "0123456789";
             if (!chars.contains(input)) {
                 String[] quit;
                 quit = new String[]{"-1", "-1"};
@@ -44,7 +43,7 @@ public class Ex1 {
                 return quit;
             }
         }
-        if (count == 1 && lastb == input.length() - 2 && input.length() > 1) {
+        if (count == 1 && lastb == input.length() - 2 && input.length() > 1 && lastb != 0) {
             int numLen = input.length();
             String num = input.substring(0, numLen - 2);
             String base = input.substring(numLen - 1);
@@ -60,14 +59,13 @@ public class Ex1 {
 
         String[] finalResult = result.toArray(String[]::new);
         String chars = "ABCDEFG";
-        String chars2 = "123456789";
-        if(chars2.contains(finalResult[1])){
+        String chars2 = "0123456789";
+        if (chars2.contains(finalResult[1])) {
             return finalResult;
         }
         if (chars.contains(finalResult[1])) {
             finalResult[1] = String.valueOf(finalResult[1].charAt(0) - 55);
-        }
-        else {
+        } else {
             finalResult[1] = "-1";
         }
         return finalResult;
@@ -83,7 +81,7 @@ public class Ex1 {
             if (!Integer.toString(sBase).equals("-1"))
                 return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
         }
-            return -1;
+        return -1;
 
     }
 
@@ -99,7 +97,6 @@ public class Ex1 {
         int count = 0;
         int base = 10;
         String number = "";
-        a = a.strip();
         int lastb = a.lastIndexOf('b');
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) == 'b')
@@ -109,78 +106,79 @@ public class Ex1 {
             return false;
         } else {
             if (count == 0) {
-                 base = 10;
-                 number = a;
-            }
-            else if (count == 1 && lastb == a.length() - 2 && a.length() > 1) {
-                 base = Integer.parseInt(input2NumAndBase(a)[1]);
-                 number = input2NumAndBase(a)[0];
-            }
-            else {
+                base = 10;
+                number = a;
+            } else if (count == 1 && lastb == a.length() - 2 && a.length() > 1) {
+                base = Integer.parseInt(input2NumAndBase(a)[1]);
+                number = input2NumAndBase(a)[0];
+            } else {
                 return false;
             }
-                for (char c : number.toCharArray()) {
-                    int digitValue = Character.isDigit(c)
-                            ? c - '0' // Convert '0'-'9' to 0-9
-                            : c - 'A' + 10; // Convert 'A'-'G' to 10-16
+            for (char c : number.toCharArray()) {
+                int digitValue = Character.isDigit(c)
+                        ? c - '0' // Convert '0'-'9' to 0-9
+                        : c - 'A' + 10; // Convert 'A'-'G' to 10-16
 
-                    // Check if the digit is valid for the base
-                    if (digitValue < 0 || digitValue >= base) {
-                        return false; // Invalid digit
-                    }
+                // Check if the digit is valid for the base
+                if (digitValue < 0 || digitValue >= base) {
+                    return false; // Invalid digit
                 }
+            }
 
             return ans; // All digits are valid
         }
     }
 
 
-        /**
-         * Calculate the number representation (in basis base)
-         * of the given natural number (represented as an integer).
-         * If num<0 or base is not in [2,16] the function should return "" (the empty String).
-         * @param num the natural number (include 0).
-         * @param base the basis [2,16]
-         * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
-         */
-        public static String int2Number ( int num, int base) {
-            String ans = "";
-            String sNum = String.valueOf(num);
-            int sBase = Integer.parseInt(input2NumAndBase(sNum)[1]);
-            ans = String.valueOf(Integer.parseInt(Integer.toString(Integer.parseInt(sNum, sBase), base)));
-            return ans;
-        }
-
-        /**
-         * Checks if the two numbers have the same value.
-         * @param n1 first number
-         * @param n2 second number
-         * @return true iff the two numbers have the same values.
-         */
-        public static boolean equals (String n1, String n2){
-            boolean ans = true;
-            // add your code here
-
-            ////////////////////
-            return ans;
-        }
-
-        /**
-         * This static function search for the array index with the largest number (in value).
-         * In case there are more than one maximum - returns the first index.
-         * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
-         * @param arr an array of numbers
-         * @return the index in the array in with the largest number (in value).
-         *
-         */
-        public static int maxIndex (String[]arr){
-            int ans = 0;
-            for(int i = 0; i < 4; i++){
-                int arrI = Integer.parseInt(input2NumAndBase(arr[i])[0]);
-                if(ans < arrI){
-                    ans = arrI;
-                }
-            }
-            return ans;
-        }
+    /**
+     * Calculate the number representation (in basis base)
+     * of the given natural number (represented as an integer).
+     * If num<0 or base is not in [2,16] the function should return "" (the empty String).
+     *
+     * @param num  the natural number (include 0).
+     * @param base the basis [2,16]
+     * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
+     */
+    public static String int2Number(int num, int base) {
+        String ans = "";
+        String sNum = String.valueOf(num);
+        int sBase = Integer.parseInt(input2NumAndBase(sNum)[1]);
+        ans = String.valueOf(Integer.parseInt(Integer.toString(Integer.parseInt(sNum, sBase), base)));
+        return ans;
     }
+
+    /**
+     * Checks if the two numbers have the same value.
+     *
+     * @param n1 first number
+     * @param n2 second number
+     * @return true iff the two numbers have the same values.
+     */
+    public static boolean equals(String n1, String n2) {
+        boolean ans = true;
+        // add your code here
+
+        ////////////////////
+        return ans;
+    }
+
+    /**
+     * This static function search for the array index with the largest number (in value).
+     * In case there are more than one maximum - returns the first index.
+     * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
+     *
+     * @param arr an array of numbers
+     * @return the index in the array in with the largest number (in value).
+     */
+    public static int maxIndex(String[] arr) {
+        int ans = 0;
+        for (int i = 0; i < 4; i++) {
+            int arrI = Integer.parseInt(input2NumAndBase(arr[i])[0]);
+            if (ans < arrI) {
+                ans = arrI;
+            }
+        }
+        return ans;
+    }
+}
+

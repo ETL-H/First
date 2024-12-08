@@ -18,8 +18,8 @@ public class Ex1Main {
             System.out.println();
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
-            boolean flag = true;
             boolean ans1 = Ex1.isNumber(num1);
+            boolean flag = true;
             if(num1.equals("quit")){
                 flag = false;
             }
@@ -38,7 +38,7 @@ public class Ex1Main {
             if(!num2.equals(quit) && flag){
                 boolean ans2 = Ex1.isNumber(num2);
                 if(ans2) {
-                    System.out.println(num2 + " is number: True , value = " + Ex1.number2Int(num2));
+                    System.out.println(num2 + " is number: true , value = " + Ex1.number2Int(num2));
                     System.out.println("Enter a base for out put - [2,16]: " );
                     String outPutBase = sc.next();
                     boolean isBase = false;
@@ -57,8 +57,9 @@ public class Ex1Main {
                         String finalMulti = Ex1.int2Number(multiNumbers, theOutPutBase);
                         String[] maxCheck = {num1, num2, finalAdd, finalMulti};
                         int maxNum = Ex1.maxIndex(maxCheck);
-                        System.out.println(num1 + "+" + num2 + "=" + finalAdd);
-                        System.out.println("Max number over ["+ num1+","+ num2 +","+ finalAdd +","+ finalMulti + "]is: " + maxNum);
+                        System.out.println(num1 + " + " + num2 + " = " + finalAdd);
+                        System.out.println(num1 + " * " + num2 + " = " + finalMulti);
+                        System.out.println("Max number over ["+ num1+", "+ num2 +", "+ finalAdd +", "+ finalMulti + "] is: " + maxNum);
 
                     }
                     else{
