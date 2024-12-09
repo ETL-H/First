@@ -1,7 +1,5 @@
-package assignments.ex1;
+package assignments.ex1.Code;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * This class represents a simple solution for Ex1.

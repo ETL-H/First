@@ -1,9 +1,9 @@
-package assignments.ex1;
-import java.util.Arrays;
+package assignments.ex1.Code;
+
 import java.util.Scanner;
 
 
-import static assignments.ex1.Ex1.*;
+import static assignments.ex1.Code.Ex1.*;
 /**
  * Intro2CS, Ex1 - very basic "main template"
  * Make sure your implementation of this main performs as the Ex1Sol.jar solution implement all needed functions.
