@@ -1,25 +1,16 @@
 package assignments.ex1.Code;
+
 import java.util.ArrayList;
 
 /**
- * This class represents a simple solution for Ex1.
- * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
- * In this assignment, we will design a number formatting converter and calculator.
- * In general, we will use Strings as numbers over basis of binary till Hexa.
- * [2-16], 10-16 are represented by A,B,..G.
- * The general representation of the numbers is as a String with the following format:
- * <number><b><base> e.g., “135bA” (i.e., “135”, as 10 is the default base), “100111b2”, “12345b6”,”012b5”, “123bG”, “EFbG”.
- * The following are NOT in the format (not a valid number):
- * “b2”, “0b1”, “123b”, “1234b11”, “3b3”, “-3b5”, “3 b4”, “GbG”, "", null,
- * You should implement the following static functions:
+ * Class implementing number format conversion and basic arithmetic for bases [2,16].
  */
 public class Ex1 {
+
     /**
-     * Convert the given number (num) to a decimal representation (as int).
-     * It the given number is not in a valid format returns -1.
-     *
-     * @param //num a String representing a number in basis [2,16]
-     * @return
+     * Splits the input string into a number and its base.
+     * @param input The input string representing a number in a specific base.
+     * @return An array containing the number and base, or {-1, -1} for invalid input.
      */
     public static String[] input2NumAndBase(String input) {
         ArrayList<String> result = new ArrayList<String>();
@@ -70,7 +61,11 @@ public class Ex1 {
         return finalResult;
     }
 
-
+    /**
+     * Converts a formatted number string into its decimal integer value.
+     * @param num The input number as a string.
+     * @return The decimal integer value, or -1 if invalid.
+     */
     public static int number2Int(String num) {
         if (isNumber(num)) {
             String number = input2NumAndBase(num)[0];
@@ -81,15 +76,12 @@ public class Ex1 {
                 return Integer.parseInt(Integer.toString(Integer.parseInt(number, sBase), dBase));
         }
         return -1;
-
     }
 
-
     /**
-     * This static function checks if the given String (g) is in a valid "number" format.
-     *
-     * @param a a String representing a number
-     * @return true iff the given String is in a number format
+     * Checks if the given string represents a valid number in the required format.
+     * @param a The input string.
+     * @return True if valid, false otherwise.
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
@@ -128,15 +120,11 @@ public class Ex1 {
         }
     }
 
-
     /**
-     * Calculate the number representation (in basis base)
-     * of the given natural number (represented as an integer).
-     * If num<0 or base is not in [2,16] the function should return "" (the empty String).
-     *
-     * @param num  the natural number (include 0).
-     * @param base the basis [2,16]
-     * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
+     * Converts a decimal integer to its string representation in the specified base.
+     * @param num The decimal integer.
+     * @param base The base for conversion.
+     * @return The number in the specified base, or an empty string if invalid.
      */
     public static String int2Number(int num, int base) {
         String ans = "";
@@ -145,6 +133,7 @@ public class Ex1 {
         char charBase = (char)base;
         String strBase = String.valueOf(base);
         ans = Integer.toString(Integer.parseInt(String.valueOf(num), sBase), base);
+        ans = ans.toUpperCase();
         for (int i = 10; i <= 16; i++){
             if(base == i){
                 charBase += 55 ;
@@ -158,11 +147,10 @@ public class Ex1 {
     }
 
     /**
-     * Checks if the two numbers have the same value.
-     *
-     * @param n1 first number
-     * @param n2 second number
-     * @return true if the two numbers have the same values.
+     * Checks if two numbers are equal in value.
+     * @param n1 The first number.
+     * @param n2 The second number.
+     * @return True if equal, false otherwise.
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
@@ -175,12 +163,9 @@ public class Ex1 {
     }
 
     /**
-     * This static function search for the array index with the largest number (in value).
-     * In case there are more than one maximum - returns the first index.
-     * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
-     *
-     * @param arr an array of numbers
-     * @return the index in the array in with the largest number (in value).
+     * Finds the index of the maximum number in an array.
+     * @param arr An array of numbers as strings.
+     * @return The index of the maximum number.
      */
     public static int maxIndex(String[] arr) {
         int arrII = -1;
@@ -195,12 +180,15 @@ public class Ex1 {
         return ans;
     }
 
+    /**
+     * Checks if a string contains any spaces.
+     * @param input The input string.
+     * @return True if spaces are present, false otherwise.
+     */
     public static boolean hasSpace(String input) {
         boolean hasSpace = false;
 
-
-        for (
-                int i = 0; i < input.length(); i++) {
+        for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             if (c == ' ') {
                 hasSpace = true;
@@ -210,5 +198,3 @@ public class Ex1 {
         return hasSpace;
     }
 }
-
-
