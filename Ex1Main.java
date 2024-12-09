@@ -58,12 +58,6 @@ public class Ex1Main {
                         String finalMulti = Ex1.int2Number(multiNumbers, theOutPutBase);
                         String[] maxCheck = {num1, num2, finalAdd, finalMulti};
                         int maxNum = Ex1.maxIndex(maxCheck);
-                        if(!sValBase.equals("10")){
-                            maxCheck[2] = maxCheck[2] + "b" + sValBase;
-                            maxCheck[3] = maxCheck[3] + "b" + sValBase;
-                            finalAdd +=  "b" + sValBase;
-                            finalMulti +=  "b" + sValBase;
-                        }
                         String maxNumS = maxCheck[maxNum];
                         System.out.println(num1 + " + " + num2 + " = " + finalAdd);
                         System.out.println(num1 + " * " + num2 + " = " + finalMulti);

@@ -1,6 +1,7 @@
 package assignments.ex1;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This class represents a simple solution for Ex1.
@@ -142,8 +143,19 @@ public class Ex1 {
     public static String int2Number(int num, int base) {
         String ans = "";
         String sNum = String.valueOf(num);
-        int sBase = Integer.parseInt(input2NumAndBase(sNum)[1]);
+        int sBase = Integer.parseInt((input2NumAndBase(sNum)[1]));
+        char charBase = (char)base;
+        String strBase = String.valueOf(base);
         ans = Integer.toString(Integer.parseInt(String.valueOf(num), sBase), base);
+        for (int i = 10; i <= 16; i++){
+            if(base == i){
+                charBase += 55 ;
+                strBase = String.valueOf(charBase);
+            }
+        }
+        if(base != 10){
+            ans += "b" + strBase;
+        }
         return ans;
     }
 
@@ -152,13 +164,15 @@ public class Ex1 {
      *
      * @param n1 first number
      * @param n2 second number
-     * @return true iff the two numbers have the same values.
+     * @return true if the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
-        // add your code here
-
-        ////////////////////
+            int firstNumber = number2Int(n1);
+            int secondNumber = number2Int(n2);
+            if(firstNumber != secondNumber){
+                ans = false;
+            }
         return ans;
     }
 
@@ -171,11 +185,13 @@ public class Ex1 {
      * @return the index in the array in with the largest number (in value).
      */
     public static int maxIndex(String[] arr) {
+        int arrII = -1;
         int ans = 0;
         for (int i = 0; i < 4; i++) {
             int arrI = number2Int(arr[i]);
-            if (ans < arrI) {
+            if (arrII < arrI) {
                 ans = i;
+                arrII = arrI;
             }
         }
         return ans;
