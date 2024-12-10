@@ -1,4 +1,4 @@
-package assignments.ex1.Code;
+package Code;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

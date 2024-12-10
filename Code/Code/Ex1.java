@@ -1,4 +1,4 @@
-package assignments.ex1.Code;
+package Code;
 
 import java.util.ArrayList;
 
